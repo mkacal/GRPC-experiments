@@ -43,7 +43,7 @@ namespace GreeterServer
         // Server side handler of the SayHello RPC
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
-            var token = context.RequestHeaders.Where(p => p.Key == "token"); //context.RequestHeaders.ToList();
+            var token = context.RequestHeaders.Where(p => p.Key == "token"); 
 
 
             return Task.FromResult(new HelloReply { Message = "Hello " + request.Name });
@@ -56,8 +56,6 @@ namespace GreeterServer
 
         public static void Main(string[] args)
         {
-            var callCre = CallCredentials.FromInterceptor(MyAsyncAuthInterceptor);
-
             var cacert = File.ReadAllText(@"C:\Sertifika\ca.crt");
             var servercert = File.ReadAllText(@"C:\Sertifika\server.crt");
             var serverkey = File.ReadAllText(@"C:\Sertifika\server.key");
@@ -82,11 +80,6 @@ namespace GreeterServer
 
 
 
-        public static Task MyAsyncAuthInterceptor(AuthInterceptorContext context, Metadata metadata)
-        {
-
-            return Task.FromResult(0);
-        }
 
 
 

@@ -40,8 +40,6 @@ namespace GreeterClient
         public static void Main(string[] args)
         {
             var callCre = CallCredentials.FromInterceptor(MyAsyncAuthInterceptor);
-            //var channelCredentials = new SslCredentials();
-            //var crd = ChannelCredentials.Create(channelCredentials, callCre);
 
             var cacert = File.ReadAllText(@"C:\Sertifika\ca.crt");
             var clientcert = File.ReadAllText(@"C:\Sertifika\client.crt");
