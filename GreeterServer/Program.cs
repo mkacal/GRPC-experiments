@@ -46,7 +46,7 @@ namespace GreeterServer
             var token = context.RequestHeaders.Where(p => p.Key == "token"); 
 
 
-            return Task.FromResult(new HelloReply { Message = "Hello " + request.Name });
+            return Task.FromResult(new HelloReply { Message = "Server1: Hello " + request.Name });
         }
     }
 

@@ -32,11 +32,14 @@ using Grpc.Core;
 using Helloworld;
 using System.Threading.Tasks;
 using System.IO;
+using Google.Protobuf;
 
 namespace GreeterClient
 {
     class Program
     {
+        public static Channel channel;
+
         public static void Main(string[] args)
         {
             var callCre = CallCredentials.FromInterceptor(MyAsyncAuthInterceptor);
@@ -48,24 +51,33 @@ namespace GreeterClient
 
             var crd = ChannelCredentials.Create(sslCrd, callCre);
 
-            Channel channel = new Channel("localhost:50051", crd);
+            channel = new Channel("localhost:50051", crd);
+            var channel2 = new Channel("localhost:50052", crd);
 
-            var client = new Greeter.GreeterClient(channel);
-            String user = "you";
+            var inv = new MyInvoker(new Channel[] { channel, channel2 });
 
-            var reply = client.SayHello(new HelloRequest { Name = user });
-            Console.WriteLine("Greeting: " + reply.Message);
+            var client = new Greeter.GreeterClient(inv);
+
+            while (true)
+            {
+                var user = Console.ReadLine();
+
+                if (user == "q")
+                    break;
+                var reply = client.SayHello(new HelloRequest { Name = user });
+                Console.WriteLine("Greeting: " + reply.Message);
+            }
 
             channel.ShutdownAsync().Wait();
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
+            channel2.ShutdownAsync().Wait();
         }
+
 
 
         public static Task MyAsyncAuthInterceptor(AuthInterceptorContext context, Metadata metadata)
         {
             metadata.Add("token", "abc");
-
+            var st = channel.State;
             return Task.FromResult(0);
         }
 

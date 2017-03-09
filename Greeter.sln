@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreeterServer2", "GreeterServer2\GreeterServer2.csproj", "{3597E740-450F-4EDE-B165-72CFA31D99F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{ACCF4597-3748-4117-8633-1CB767F8CCC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACCF4597-3748-4117-8633-1CB767F8CCC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACCF4597-3748-4117-8633-1CB767F8CCC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3597E740-450F-4EDE-B165-72CFA31D99F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3597E740-450F-4EDE-B165-72CFA31D99F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3597E740-450F-4EDE-B165-72CFA31D99F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3597E740-450F-4EDE-B165-72CFA31D99F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
