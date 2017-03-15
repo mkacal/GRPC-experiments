@@ -11,6 +11,7 @@ namespace GreeterClient
     public class MyInvoker : CallInvoker
     {
         private Channel[] _channels;
+        private Channel channel;
         private int maxRetryCount = 3;
         /// <summary>
         /// Initializes a new instance of the <see cref="Grpc.Core.DefaultCallInvoker"/> class.
@@ -40,7 +41,7 @@ namespace GreeterClient
                 {
                     retryCount++;
 
-                    if (retryCount > maxRetryCount)
+                    if (channel.State != ChannelState.TransientFailure || retryCount > maxRetryCount)
                         throw;
                 }
                 catch (Exception ex)
@@ -96,8 +97,8 @@ namespace GreeterClient
                 where TRequest : class
                 where TResponse : class
         {
-            var channel = GrpcPreconditions.CheckNotNull(
-                    _channels.Where(p => p.State == ChannelState.Ready || p.State == ChannelState.Idle)
+            channel = GrpcPreconditions.CheckNotNull(
+                    _channels.Where(p => p.State != ChannelState.TransientFailure)
                     .FirstOrDefault()
                 );
 

@@ -47,8 +47,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aspect\AspectBase.cs" />
+    <Compile Include="Aspect\AspectContext.cs" />
+    <Compile Include="AuthorizeAttribute.cs" />
+    <Compile Include="Aspect\IAfterAspect.cs" />
+    <Compile Include="Aspect\IAfterVoidAspect.cs" />
+    <Compile Include="Aspect\IAspect.cs" />
+    <Compile Include="Aspect\IBeforeAspect.cs" />
+    <Compile Include="Aspect\IBeforeControlAspect.cs" />
+    <Compile Include="Aspect\IBeforeVoidAspect.cs" />
+    <Compile Include="LogAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Aspect\TransparentProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

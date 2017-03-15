@@ -62,8 +62,8 @@ namespace Helloworld {
     }
 
     /// <summary>Base class for server-side implementations of Greeter</summary>
-    public abstract class GreeterBase
-    {
+    public abstract class GreeterBase: MarshalByRefObject
+        {
       /// <summary>
       ///  Sends a greeting
       /// </summary>

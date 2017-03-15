@@ -41,6 +41,8 @@ namespace GreeterServer
     class GreeterImpl : Greeter.GreeterBase
     {
         // Server side handler of the SayHello RPC
+        [Authorize]
+        [Log]
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
             var token = context.RequestHeaders.Where(p => p.Key == "token"); 
@@ -49,6 +51,10 @@ namespace GreeterServer
             return Task.FromResult(new HelloReply { Message = "Server1: Hello " + request.Name });
         }
     }
+
+
+
+
 
     class Program
     {
@@ -63,9 +69,9 @@ namespace GreeterServer
             var sslCredentials = new SslServerCredentials(new List<KeyCertificatePair>() { keypair }, cacert, false);
 
             
-             Server server = new Server
+            Server server = new Server
             {
-                Services = { Greeter.BindService(new GreeterImpl()) },
+                Services = { Greeter.BindService(TransparentProxy<GreeterImpl, Greeter.GreeterBase>.GenerateProxy()) },
                 Ports = { new ServerPort("localhost", Port, sslCredentials) }
             };
             
